@@ -1,0 +1,28 @@
+header{
+    height: 100px;
+    width: 100%;
+    text-align: center;
+    background-color: lightblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+#final{
+    border: solid 2px skyblue;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.description{
+    margin: 12px;
+    text-align: center;
+}
+hooter{
+    text-align: center;
+}

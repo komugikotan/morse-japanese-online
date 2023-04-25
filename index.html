@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>和文モールス　送信練習</title>
     <script>
         var date = new Date();
@@ -16,13 +17,92 @@
 
         let status = null;
         let current_second = null;
-        var morse = null;
+        let current_second_hoge = null;
+        var morse = "l";
+        let hogehogehoge = null;
+
+        function convert_morse(morse){
+            let final = morse;
+
+
+            final = final.replaceAll("l.----l", '1');
+            final = final.replaceAll("l..---l", '2');
+            final = final.replaceAll("l...--l", '3'); 
+            final = final.replaceAll("l....-l", '4');
+            final = final.replaceAll("l.....l", '5');
+            final = final.replaceAll("l-....l", '6'); 
+            final = final.replaceAll("l--...l", '7');
+            final = final.replaceAll("l---..l", '8');
+            final = final.replaceAll("l----.l", '9'); 
+            final = final.replaceAll("l-----l", '0');
+            final = final.replaceAll("l.-l", 'イ'); 
+            final = final.replaceAll("l-.-.l", 'ロ');
+            final = final.replaceAll("l-...l", 'ハ');
+            final = final.replaceAll("l-.-.l", 'ニ'); 
+            final = final.replaceAll("l-..l", 'ホ');
+            final = final.replaceAll("l.l", 'ヘ');
+            final = final.replaceAll("l..-..l", 'ト'); 
+            final = final.replaceAll("l..-.l", 'チ');
+            final = final.replaceAll("l--.l", 'リ');
+            final = final.replaceAll("l....l", 'ヌ'); 
+            final = final.replaceAll("l-.--.l", 'ル');
+            final = final.replaceAll("l.---l", 'ヲ');
+            final = final.replaceAll("l-.-l", 'ワ'); 
+            final = final.replaceAll("l.-..l", 'カ');
+            final = final.replaceAll("l--l", 'ヨ');
+            final = final.replaceAll("l-.l", 'タ'); 
+            final = final.replaceAll("l---l", 'レ');
+            final = final.replaceAll("l---.l", 'ソ');
+            final = final.replaceAll("l.--.l", 'ツ'); 
+            final = final.replaceAll("l--.-l", 'ネ');
+            final = final.replaceAll("l.-.l", 'ナ');
+            final = final.replaceAll("l...l", 'ラ');
+            final = final.replaceAll("l-l", 'ム'); 
+            final = final.replaceAll("l..-l", 'ウ');
+            final = final.replaceAll("l.-..-l", 'ヰ');
+            final = final.replaceAll("l..--l", 'ノ'); 
+            final = final.replaceAll("l.-...l", 'オ');
+            final = final.replaceAll("l...-l", 'ク'); 
+            final = final.replaceAll("l.--l", 'ヤ');
+            final = final.replaceAll("l-..-l", 'マ');
+            final = final.replaceAll("l-.--l", 'ケ');
+            final = final.replaceAll("l--..l", 'フ');
+            final = final.replaceAll("l----l", 'コ'); 
+            final = final.replaceAll("l-.---l", 'エ');
+            final = final.replaceAll("l.-.--l", 'テ');
+            final = final.replaceAll("l--.--l", 'ア'); 
+            final = final.replaceAll("l-.-.-l", 'サ');
+            final = final.replaceAll("l-.-..l", 'キ'); 
+            final = final.replaceAll("l-..--l", 'ユ');
+            final = final.replaceAll("l-...-l", 'メ');
+            final = final.replaceAll("l..-.-l", 'ミ'); 
+            final = final.replaceAll("l--.-.l", 'シ');
+            final = final.replaceAll("l.--..l", 'ヱ');
+            final = final.replaceAll("l--..-l", 'ヒ');
+            final = final.replaceAll("l-..-.l", 'モ');
+            final = final.replaceAll("l.---.l", 'セ'); 
+            final = final.replaceAll("l---.-l", 'ス');
+            final = final.replaceAll("l.-.-.l", 'ン');
+            final = final.replaceAll("l..l", '゛'); 
+            final = final.replaceAll("l..--.l", '゜');
+            final = final.replaceAll("l.--.-l", 'ー'); 
+            final = final.replaceAll("l.-.-..l", '、');
+            final = final.replaceAll("w", '　');
+
+            final = final.replaceAll(".", "");
+            final = final.replaceAll("-", "");
+            final = final.replaceAll("l", "");
+
+            return final;
+        }
 
         // タイマーの開始時刻を保持する変数
         let startTime = null;
+        let startTime_hoge = null;
 
         // タイマーの経過時間を保持する変数
         let elapsedTime = 0;
+        let elapsedTime_hoge = 0;
 
         // タイマーの開始関数
         function startTimer() {
@@ -40,26 +120,57 @@
             return elapsedTime;
         }
 
+        // タイマーの開始関数 ２つ目
+        function startTimer_hoge() {
+            // 開始時刻を現在の時刻に設定
+            startTime_hoge = Date.now();
+        }
+
+        // タイマーの終了関数　２つ目
+        function endTimer_hoge() {
+            // 経過時間を保持する変数（ローカル）
+            let elapsedTime_hoge = 0;
+            // 経過時間を計算
+            elapsedTime_hoge = Date.now() - startTime_hoge;
+            // 経過時間をミリ秒単位で返す
+            return elapsedTime_hoge;
+        }
+
 
         function keypress_event(e) {
-            if (status == 0){
-                if (current_second > 0.25){
-                    morse = morse + "-";
-                    console.log(morse);
-                }
-                else if (current_second < 0.25){
-                    morse = morse + ".";
-                    console.log(morse);
-                }
-                else if (current_second > 0.7){
-                    morse = morse + " ";
-                    console.log(morse);
-                }
-            }
-
             if(e.key === ' ' || e.key === ' '){
+                current_second_hoge = endTimer_hoge() / 1000;
+            
                 //スペースキーが押された時の処理
                 if (status != 1){
+
+                    if (status != null){
+                        hogehogehoge = 0;
+                        if (current_second_hoge > 1){
+                            if (hogehogehoge == 1){
+
+                            }
+                            else{
+                                morse = morse + "lwl";
+                                hogehogehoge = 1;
+                            }
+
+
+                        }
+                        if (current_second_hoge > 0.5) {
+                            if (hogehogehoge == 1){
+                            }
+                            else{
+                                morse = morse + "ll";
+                                hogehogehoge = 1;
+                            }
+
+                        }
+                    }
+
+                    final = convert_morse(morse);
+                    document.getElementById("final").innerHTML = "<p>" + final + "</p>";
+
                     startTimer();
                     status = 1;
                     console.log("pressed");
@@ -67,28 +178,56 @@
                 else{
 
                 }
-                
             }
+
             return false; 
         }
 
         function keyup_event(e) {
             if(e.key === ' ' || e.key === ' '){
-                //スペースキーが押された時の処理
+                //スペースキーが離された時の処理
                 if (status == 1){
                     status = 0;
                     current_second = endTimer() / 1000;
                     console.log(current_second);
+
+                    if (status == 0){
+                        if (current_second > 0.25){
+                            morse = morse + "-";
+                        }
+                        else if (current_second < 0.25){
+                            morse = morse + ".";
+                        }
+                    }
+
+                    startTimer_hoge();
+
+                    final = convert_morse(morse);
+                    document.getElementById("final").innerHTML = "<p>" + final + "</p>";
                 }
                 else{
-
+                    final = convert_morse(morse);
+                    document.getElementById("final").innerHTML = "<p>" + final + "</p>";
                 }
             }
             return false; 
         }
     </script>
 </head>
-<body>
-    <p id="output"></p>
+<body>  
+    <header>
+        <h1>和文モールス　送信練習</h1>
+    </header>
+    <main>
+        <p class="description">スペースキーを電鍵のように使って入力してください。</p>
+        <p id="final">入力した文字はここに表示されます </p>
+    </main>
+
+    <hooter>
+        <h3>このサイトはどんなサイト？</h3>
+        <p class="description">スペースキーを使って和文モールスを入力できるサイトです。以前も和文モールスを入力できるサイトはありましたが、スペースキーを使って入力できるサイトは少なかったので作成しました。現在、全てのカタカナと数字、一部の記号に対応しています。</p>
+        <h3>作成者</h3>
+        <p class="description">このサイトの作成者は、<a href="https://github.com/komugikotan">Komugikotan(Github)</a>です。改善案などは、Githubのリポジトリにお寄せください。</p>
+    </hooter>
 </body>
 </html>
