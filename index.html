@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>和文モールス　送信練習</title>
+</head>
+<body>  
+    <header>
+        <h1>和文モールス　送信練習</h1>
+    </header>
+    <main>
+        <p class="description">スペースキー、もしくは下のボタンを電鍵のように使って入力してください。</p>
+        <button id="button"></button>
+        
+    </main>
+    <p id="final">入力した文字はここに表示されます </p>
+    <hooter>
+        <h3>このサイトはどんなサイト？</h3>
+        <p class="description">スペースキーを使って和文モールスを入力できるサイトです。以前も和文モールスを入力できるサイトはありましたが、スペースキーを使って入力できるサイトは少なかったので作成しました。現在、全てのカタカナと数字、一部の記号に対応しています。</p>
+        <h3>作成者</h3>
+        <p class="description">このサイトの作成者は、<a href="https://github.com/komugikotan">Komugikotan(Github)</a>です。改善案などは、Githubのリポジトリにお寄せください。また、当サイトをご利用いただく際には、自己責任でお願いいたします。当サイトや当サイトの管理者は、ご利用によって生じたいかなる損害についても責任を負いかねます。ご了承ください。</p>
+    </hooter>
     <script>
         var date = new Date();
 
@@ -14,6 +31,9 @@
 
         document.addEventListener('keydown', keypress_event);
         document.addEventListener('keyup', keyup_event);
+
+        // ボタン要素を取得する
+        var button = document.getElementById("button");
 
         let status = null;
         let current_second = null;
@@ -182,6 +202,52 @@
 
             return false; 
         }
+        
+        // ボタンが押されたときに実行する関数を定義する
+        function buttonPressed() {
+            current_second_hoge = endTimer_hoge() / 1000;
+            
+            //スペースキーが押された時の処理
+            if (status != 1){
+
+                if (status != null){
+                    hogehogehoge = 0;
+                    if (current_second_hoge > 1){
+                        if (hogehogehoge == 1){
+
+                        }
+                        else{
+                            morse = morse + "lwl";
+                            hogehogehoge = 1;
+                        }
+
+
+                    }
+                    if (current_second_hoge > 0.5) {
+                        if (hogehogehoge == 1){
+                        }
+                        else{
+                            morse = morse + "ll";
+                            hogehogehoge = 1;
+                        }
+
+                    }
+                }
+
+                final = convert_morse(morse);
+                document.getElementById("final").innerHTML = "<p>" + final + "</p>";
+
+                startTimer();
+                status = 1;
+                console.log("pressed");
+            }
+            else{
+
+            }
+
+            return false;
+        }
+
 
         function keyup_event(e) {
             if(e.key === ' ' || e.key === ' '){
@@ -212,22 +278,41 @@
             }
             return false; 
         }
-    </script>
-</head>
-<body>  
-    <header>
-        <h1>和文モールス　送信練習</h1>
-    </header>
-    <main>
-        <p class="description">スペースキーを電鍵のように使って入力してください。</p>
-        <p id="final">入力した文字はここに表示されます </p>
-    </main>
 
-    <hooter>
-        <h3>このサイトはどんなサイト？</h3>
-        <p class="description">スペースキーを使って和文モールスを入力できるサイトです。以前も和文モールスを入力できるサイトはありましたが、スペースキーを使って入力できるサイトは少なかったので作成しました。現在、全てのカタカナと数字、一部の記号に対応しています。</p>
-        <h3>作成者</h3>
-        <p class="description">このサイトの作成者は、<a href="https://github.com/komugikotan">Komugikotan(Github)</a>です。改善案などは、Githubのリポジトリにお寄せください。</p>
-    </hooter>
+        
+        // ボタンが離されたときに実行する関数を定義する
+        function buttonReleased() {
+                //スペースキーが離された時の処理
+                if (status == 1){
+                    status = 0;
+                    current_second = endTimer() / 1000;
+                    console.log(current_second);
+
+                    if (status == 0){
+                        if (current_second > 0.25){
+                            morse = morse + "-";
+                        }
+                        else if (current_second < 0.25){
+                            morse = morse + ".";
+                        }
+                    }
+
+                    startTimer_hoge();
+
+                    final = convert_morse(morse);
+                    document.getElementById("final").innerHTML = "<p>" + final + "</p>";
+                }
+                else{
+                    final = convert_morse(morse);
+                    document.getElementById("final").innerHTML = "<p>" + final + "</p>";
+                }
+
+                return false;
+        }
+
+        // ボタンにmousedownイベントとmouseupイベントのリスナーを登録する
+        button.addEventListener("mousedown", buttonPressed);
+        button.addEventListener("mouseup", buttonReleased);
+    </script>
 </body>
 </html>

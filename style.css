@@ -12,10 +12,11 @@ body{
     margin: 0px;
     padding: 0px;
     position: relative;
+    font-family: sans-serif;
 }
 #final{
     border: solid 2px skyblue;
-    margin: 10px;
+    margin: 12px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -25,4 +26,12 @@ body{
 }
 hooter{
     text-align: center;
+}
+main{
+    text-align: center;
+}
+#button{
+    width: 95%;
+    height: 100px;
+    margin: 12px;
 }
